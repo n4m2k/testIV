@@ -1,6 +1,5 @@
 let currentArray = [];
 
-
 function createRandomArray() {
   const randomArray = [];
   const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -22,11 +21,22 @@ function createRandomArray() {
 
 function displayArray() {
   currentArray = createRandomArray();
+  originalArray = [...currentArray];
   const resultDiv = document.getElementById("result");
   resultDiv.innerHTML = `<p>${currentArray.join(", ")}</p>`;
 
   toggleSortButtons(true);
 }
+
+function toggleSortButtons(visible) {
+  const sortButtonsDiv = document.getElementById("sortButtons");
+  if (visible) {
+    sortButtonsDiv.classList.remove("hidden");
+  } else {
+    sortButtonsDiv.classList.add("hidden");
+  }
+}
+
 
 function bubbleSort(arr) {
   for (let i = 0; i < arr.length - 1; i++) {
@@ -38,16 +48,6 @@ function bubbleSort(arr) {
   }
   return arr;
 }
-
-function toggleSortButtons(visible) {
-    const sortButtonsDiv = document.getElementById("sortButtons");
-    if (visible) {
-      sortButtonsDiv.classList.remove("hidden");
-    } else {
-      sortButtonsDiv.classList.add("hidden");
-    }
-  }
-  
 
 function selectionSort(arr) {
   for (let i = 0; i < arr.length - 1; i++) {
@@ -133,4 +133,9 @@ function sortArray(sortFunction) {
   resultDiv.innerHTML = `<p>${currentArray.join(", ")}</p>`;
 }
 
+function restoreOriginalArray() {
+  currentArray = [...originalArray];
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerHTML = `<p>${currentArray.join(", ")}</p>`;
+}
 
